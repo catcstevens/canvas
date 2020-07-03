@@ -1,16 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
+// import Canvas from './Canvas';
 
-class ColourSelector extends Component {
-    render(){
-        const { hex } =this.props;
-        return (
-            <input type='color' defaultValue={hex} onChange={(event) => console.log(event)} />
-        );
+const ColourSelector = (props) => {
+
+    const hex = props.hex
+    function onInputChange(event) {
+        const onColourSelectorChange = props.onColourSelectorChange
+        onColourSelectorChange(event.target.value)
     }
+    return (
+        <input
+            type='color'
+            value={hex}
+            onChange={onInputChange}
+            />
+    )
 }
+// class ColourSelector extends Component {
 
-ColourSelector.defaultProps = {
-    hex: "#00ffff"
-}
+
+
+//     state = { hex: this.props.hex };
+
+//     onInputChange = (event) => {
+//         console.log(event.target.value);
+//         this.setState({hex: event.target.value});
+//     }
+
+//     componentDidMount() {
+//         console.log(this.state.hex);
+//     }
+
+//     render(){
+//         const { hex } =this.state;
+
+//     }
+// }
+
+// ColourSelector.defaultProps = {
+//     hex: "#00ffff"
+// }
 
 export default ColourSelector;
