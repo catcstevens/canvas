@@ -9,7 +9,7 @@ const PencilSelector = (props) => {
         paddingLeft: "5px"
     }
     const divStyles = {
-        marginTop: "1em"
+        marginTop: "9em"
     }
 
     const thickness = props.thickness

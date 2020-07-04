@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ColourSelector from './ColourSelector'
 import PencilSelector from './PencilSelector'
+import Title from './Title'
 
 const canvasStyles = {
     border: "6px solid black"
@@ -16,6 +17,7 @@ class Canvas extends Component {
         height: 400,
         width: 400,
         lineThickness: 3, 
+        title: "Untitled"
     }
 
     constructor(props) {
@@ -75,11 +77,23 @@ class Canvas extends Component {
         this.setState({ coords: [x,y]})
     }
 
+    clearCanvas = (event) => {
+        event.preventDefault()
+        this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height)
+    }
+
+    onTitleChange = (newTitle) => {
+        this.setState({title: newTitle})
+    } 
+
     render() {
         const { hex, height, width, lineThickness } = this.state
 
         return (
             <div>
+                <Title title={this.state.title}
+                    onTitleChange={this.onTitleChange}
+                />
                 <div style={divStyles}>
                     <ColourSelector
                     onColourSelectorChange={this.onColourSelectorChange}
@@ -101,6 +115,9 @@ class Canvas extends Component {
                         onMouseDown={this.onCanvasMouseDown}
                         style={canvasStyles} 
                     />
+                </div>
+                <div style={divStyles}>
+                    <button onClick={this.clearCanvas}>Clear canvas</button>
                 </div>
             </div>
         )
