@@ -14,6 +14,7 @@ class Canvas extends Component {
 
     render() {
         const { hex } = this.state;
+        
         return (
             <div> 
                 <ColourSelector 
