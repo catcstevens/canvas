@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import ColourSelector from './ColourSelector'
+import PencilSelector from './PencilSelector'
 
 const canvasStyles = {
     border: "6px solid black"
@@ -13,7 +14,8 @@ class Canvas extends Component {
         hex: "#f4424b",
         coords: null,
         height: 400,
-        width: 400 
+        width: 400,
+        lineThickness: 3, 
     }
 
     constructor(props) {
@@ -34,11 +36,14 @@ class Canvas extends Component {
         this.context = this.canvasRef.current.getContext('2d');
         this.context.strokeStyle = this.state.hex;
         this.context.lineJoin = "round";
-        this.context.lineWidth = 3;
+        this.context.lineWidth = this.state.lineThickness;
     }
 
     onColourSelectorChange = (newHex) => {
         this.setState({ hex: newHex})
+    }
+    onPencilSelectorChange = (newThickness) => {
+        this.setState({lineThickness: newThickness})
     }
 
     onCanvasMouseMove = (event) => {
@@ -71,7 +76,7 @@ class Canvas extends Component {
     }
 
     render() {
-        const { hex, height, width } = this.state
+        const { hex, height, width, lineThickness } = this.state
 
         return (
             <div>
@@ -80,6 +85,11 @@ class Canvas extends Component {
                     onColourSelectorChange={this.onColourSelectorChange}
                     hex={hex}
                     />
+                    <PencilSelector
+                        onPencilSelectorChange={this.onPencilSelectorChange}
+                        thickness={lineThickness}
+                    />
+
                 </div>
                 <div style={divStyles}>
                     <canvas 
